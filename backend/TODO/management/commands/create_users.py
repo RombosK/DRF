@@ -10,18 +10,5 @@ class Command(BaseCommand):
         email_list = ['1@gb.ru', '2@gb.ru', '3@gb.ru']
         for x in email_list:
             x = x
-            users_list.append(
-                User(username=get_random_string(), first_name=get_random_string(), last_name=get_random_string(), email=x))
-
-
-# class Command(BaseCommand):
-#     def handle(self, *args, **options):
-#         users_list = []
-#         email_list = ['1@gb.ru', '2@gb.ru', '3@gb.ru']
-#
-#         for i in range(1, 4):
-#             users_list.append(
-#                 User(username=get_random_string(), first_name=get_random_string(), last_name=get_random_string(),
-#                      email=x))
-#
-#         User.objects.bulk_create(users_list)
+            users_list.append(User.objects.create_user(username=get_random_string(), first_name=get_random_string(),
+                                                       last_name=get_random_string(), email=x))
