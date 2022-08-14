@@ -22,8 +22,8 @@ from TODO.views import UserModelViewSet
 
 router = DefaultRouter()
 router.register('users', UserModelViewSet)
-router.register('project', ProjectModelViewSet)
-router.register('todo', TodoModelViewSet)
+router.register('projects', ProjectModelViewSet)
+router.register('todos', TodoModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
