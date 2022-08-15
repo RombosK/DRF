@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import UserList from './components/UserList.js'
 import MenuList from './components/Menu.js'
-import FooterList from "./components/Footer.js";
+import FooterList from './components/Footer.js'
+import './index.css'
+import './App.css';
 
 
 class App extends React.Component {
@@ -89,3 +91,4 @@ class App extends React.Component {
 }
 
 export default App;
+
