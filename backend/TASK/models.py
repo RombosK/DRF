@@ -30,13 +30,7 @@ class Project(BaseModel):
         ordering = ['-created', 'project_name']
 
 
-# class TodoManager(models.Manager):
-#     def get_queryset(self):
-#         return super().get_queryset().filter(deleted=False)
-
-
 class Todo(BaseModel):
-    # objects = TodoManager()
     DoesNotExist = models.Manager
     note_header = models.CharField(max_length=64, verbose_name='Header', null=True)
     note_text = models.CharField(max_length=255, verbose_name='Text')
@@ -48,6 +42,3 @@ class Todo(BaseModel):
     class Meta:
         verbose_name = 'Note'
         verbose_name_plural = 'Notes'
-
-
-
