@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import UserList from './components/UserList.js'
 import MenuList from './components/Menu.js'
-import FooterList from "./components/Footer";
+import FooterList from "./components/Footer.js";
 
 
 class App extends React.Component {
@@ -19,7 +19,7 @@ class App extends React.Component {
            'name': 'Log in' ,
             'url': '/login'
         },
-         ,
+
          {
             'name': 'Log out',
             'url': '/logout'
@@ -43,8 +43,7 @@ class App extends React.Component {
         this.state = {
             'menu': this.menu,
             'footer': this.footer,
-            'users':
-                []
+            'users': []
         }
     }
 
