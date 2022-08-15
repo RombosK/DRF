@@ -11,7 +11,7 @@ class ProjectModelSerializer(ModelSerializer):
 
 class ToDoModelSerializer(ModelSerializer):
     note_project = ProjectModelSerializer(many=False)
-    note_user = UserModelSerializer(many=False)
+    note_worker = UserModelSerializer(many=False)
 
     class Meta:
         model = Todo

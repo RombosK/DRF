@@ -22,3 +22,4 @@ const FooterList = ({item_footer}) => {
 
 export default FooterList;
 
+
