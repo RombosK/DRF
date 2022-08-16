@@ -19,6 +19,3 @@ const MenuList = ({item_menu}) => {
 }
 
 export default MenuList;
-
-
-

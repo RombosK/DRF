@@ -3,8 +3,8 @@ import axios from 'axios'
 import UserList from './components/UserList.js'
 import MenuList from './components/Menu.js'
 import FooterList from './components/Footer.js'
-import './index.css'
-import './App.css'
+// import './index.css'
+// import './App.css'
 
 
 class App extends React.Component {
@@ -27,7 +27,6 @@ class App extends React.Component {
             'url': '/logout'
         },
     ]
-
     footer = [
 
         {
@@ -40,6 +39,8 @@ class App extends React.Component {
         },
 
     ]
+
+
     constructor(props) {
         super(props)
         this.state = {

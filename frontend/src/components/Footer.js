@@ -11,7 +11,6 @@ const FooterItem = ({footer}) => {
     )
 }
 
-
 const FooterList = ({item_footer}) => {
     return (
         <ul className='panel-footer'>
@@ -21,4 +20,3 @@ const FooterList = ({item_footer}) => {
 }
 
 export default FooterList;
-
