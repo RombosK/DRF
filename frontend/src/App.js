@@ -4,7 +4,7 @@ import UserList from './components/UserList.js'
 import MenuList from './components/Menu.js'
 import FooterList from './components/Footer.js'
 import './index.css'
-import './App.css';
+import './App.css'
 
 
 class App extends React.Component {
@@ -73,16 +73,7 @@ class App extends React.Component {
 
                 <div className='panel-footer'>
                     {<FooterList item_footer={this.state.footer} />}
-                    <p>
-                        <strong>Полезное</strong>
-                    </p>
-                    <p>
-                        <ul className="list-unstyled">
-                            <li><a href="#">Положения &amp; Условия</a></li>
-                            <li><a href="#">Конфиденциальность &amp; Cookies</a></li>
-                            <li><a href="#">Документация по API</a></li>
-                        </ul>
-                    </p>
+
                 </div>
 
             </div>
