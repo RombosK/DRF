@@ -31,12 +31,12 @@ class Project(BaseModel):
 
 
 class Todo(BaseModel):
-    DoesNotExist = models.Manager
+    # DoesNotExist = models.Manager
     note_header = models.CharField(max_length=64, verbose_name='Header', null=True)
     note_text = models.CharField(max_length=255, verbose_name='Text')
     is_active = models.BooleanField(default=True, verbose_name='Activity')
     note_worker = models.OneToOneField(get_user_model(), on_delete=models.SET_NULL, null=True,
-                                       verbose_name='Note creator')
+                                       verbose_name='Note manager')
     note_project = models.OneToOneField(Project, on_delete=models.CASCADE, verbose_name='Note project')
 
     class Meta:

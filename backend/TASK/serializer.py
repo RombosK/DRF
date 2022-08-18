@@ -4,6 +4,8 @@ from TODO.serializer import UserModelSerializer
 
 
 class ProjectModelSerializer(ModelSerializer):
+    project_workers = UserModelSerializer(many=False)
+
     class Meta:
         model = Project
         fields = '__all__'
@@ -16,6 +18,3 @@ class ToDoModelSerializer(ModelSerializer):
     class Meta:
         model = Todo
         fields = '__all__'
-
-
-

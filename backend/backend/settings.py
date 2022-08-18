@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'TODO',
     'TASK',
     'django_filters',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
@@ -141,15 +142,17 @@ REST_FRAMEWORK = {
         # 'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
         # 'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
         'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer'),
+        'rest_framework.renderers.BrowsableAPIRenderer'
+    ),
 
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    # 'PAGE_SIZE': 100,
+    'PAGE_SIZE': 100,
 
     'DEFAULT_PARSER_CLASSES': [
         'djangorestframework_camel_case.parser.CamelCaseFormParser',
         'djangorestframework_camel_case.parser.CamelCaseMultiPartParser',
         'djangorestframework_camel_case.parser.CamelCaseJSONParser', ],
 }
+
