@@ -1,4 +1,4 @@
-# from rest_framework.pagination import PageNumberPagination
+from rest_framework.pagination import PageNumberPagination
 # from rest_framework.renderers import JSONRenderer
 # from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
@@ -9,7 +9,6 @@ from .models import Project, Todo
 from .serializer import ProjectModelSerializer, ToDoModelSerializer
 from .filters import ProjectFilter, TodoFilter
 from rest_framework.pagination import LimitOffsetPagination
-
 
 """ модель Project: доступны все варианты запросов; для постраничного вывода
 установить размер страницы 10 записей; добавить фильтрацию по совпадению части
@@ -52,5 +51,3 @@ class TodoModelViewSet(ModelViewSet):
     def perform_destroy(self, instance):
         instance.deleted = True
         instance.save()
-
-
