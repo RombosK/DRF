@@ -100,6 +100,30 @@ class App extends React.Component {
                 )
             })
             .catch(error => console.log(error))
+
+        axios
+            .get('http://127.0.0.1:8000/api/projects/')
+            .then(response => {
+                const projects = response.data.results
+                this.setState(
+                    {
+                        'projects': projects
+                    }
+                )
+            })
+            .catch(error => console.log(error))
+
+        axios
+            .get('http://127.0.0.1:8000/api/todos/')
+            .then(response => {
+                const todos = response.data.results
+                this.setState(
+                    {
+                        'todos': todos
+                    }
+                )
+            })
+            .catch(error => console.log(error))
     }
 
     render() {
@@ -126,13 +150,6 @@ class App extends React.Component {
                     </Routes>
                 </BrowserRouter>
             </div>
-
-
-
-                 {/*<div className='content'>*/}
-                 {/*    {<UserList users={this.state.users} />}*/}
-                 {/*</div>*/}
-
                  <div className='panel-footer'>
                      {<FooterList item_footer={this.state.footer} />}
                </div>
