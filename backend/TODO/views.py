@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 # from rest_framework.viewsets import ModelViewSet
 # from django_filters import rest_framework as filters
+from rest_framework.permissions import BasePermission, IsAuthenticated, DjangoModelPermissions
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -13,6 +14,12 @@ from rest_framework.mixins import RetrieveModelMixin, ListModelMixin, UpdateMode
 
 """Представление, которое возвращает подсчет активных пользователей в JSON
 """
+
+
+# class CustomPermissions(BasePermission):
+#
+#     def has_permission(self, request, view):
+#         return request.user and request.user.username == 'django(super)'
 
 
 class UserCountView(APIView):
@@ -34,6 +41,7 @@ class UserModelViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, Cre
     serializer_class = UserModelSerializer
     queryset = User.objects.all()
     filter_set_class = UserFilter
+    permission_classes = [DjangoModelPermissions]
 
     def perform_destroy(self, instance):
         instance.deleted = True

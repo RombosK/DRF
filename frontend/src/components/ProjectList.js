@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 
 const ProjectItem = ({project}) => {
     return (
@@ -8,7 +8,7 @@ const ProjectItem = ({project}) => {
                 {project.project_name}
             </td>
             <td>
-                {project.description}
+                <Link to={`/projects/${project.id}`}>{project.description}</Link>
             </td>
             <td>
                 {project.project_url}
