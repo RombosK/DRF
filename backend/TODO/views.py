@@ -11,15 +11,29 @@ from .serializer import UserModelSerializer
 from .filters import UserFilter
 from rest_framework.mixins import RetrieveModelMixin, ListModelMixin, UpdateModelMixin, CreateModelMixin, \
     DestroyModelMixin
+from rest_framework.response import Response
+
+# from rest_framework.authtoken.views import ObtainAuthToken
+# from rest_framework.authtoken.models import Token
+#
+#
+# class CustomAuthToken(ObtainAuthToken):
+#
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.serializer_class(data=request.data,
+#                                            context={'request': request})
+#         serializer.is_valid(raise_exception=True)
+#         user = serializer.validated_data['user']
+#         token, created = Token.objects.get_or_create(user=user)
+#         return Response({
+#             'token': token.key,
+#             'user_id': user.pk,
+#             'email': user.email
+#         })
+
 
 """Представление, которое возвращает подсчет активных пользователей в JSON
 """
-
-
-# class CustomPermissions(BasePermission):
-#
-#     def has_permission(self, request, view):
-#         return request.user and request.user.username == 'django(super)'
 
 
 class UserCountView(APIView):
@@ -41,7 +55,8 @@ class UserModelViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, Cre
     serializer_class = UserModelSerializer
     queryset = User.objects.all()
     filter_set_class = UserFilter
-    permission_classes = [DjangoModelPermissions]
+
+    # permission_classes = [DjangoModelPermissions]
 
     def perform_destroy(self, instance):
         instance.deleted = True
