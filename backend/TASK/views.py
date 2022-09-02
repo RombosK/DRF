@@ -18,19 +18,19 @@ from rest_framework.pagination import LimitOffsetPagination
 постраничного вывода установить размер страницы 20"""
 
 
-class ProjectOffsetPagination(LimitOffsetPagination):
-    default_limit = 10
+# class ProjectOffsetPagination(LimitOffsetPagination):
+#     default_limit = 10
 
 
-class TodoOffsetPagination(LimitOffsetPagination):
-    default_limit = 20
+# class TodoOffsetPagination(LimitOffsetPagination):
+#     default_limit = 20
 
 
 class ProjectModelViewSet(ModelViewSet):
     serializer_class = ProjectModelSerializer
     queryset = Project.objects.all()
     filter_set_class = ProjectFilter
-    pagination_class = ProjectOffsetPagination
+    # pagination_class = ProjectOffsetPagination
 
     @action(detail=True, methods=['get'])
     def get_project_name(self, request, pk):
@@ -46,7 +46,7 @@ class TodoModelViewSet(ModelViewSet):
     serializer_class = ToDoModelSerializer
     queryset = Todo.objects.all()
     filter_set_class = TodoFilter
-    pagination_class = TodoOffsetPagination
+    # pagination_class = TodoOffsetPagination
 
     def perform_destroy(self, instance):
         instance.deleted = True
