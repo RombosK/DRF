@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 from .models import User
-from .serializer import UserModelSerializer
+from .serializer import UserModelSerializer, UserModelSerializerV2
 from .filters import UserFilter
 from rest_framework.mixins import RetrieveModelMixin, ListModelMixin, UpdateModelMixin, CreateModelMixin, \
     DestroyModelMixin
@@ -52,9 +52,14 @@ class UserCountView(APIView):
 
 class UserModelViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, CreateModelMixin, DestroyModelMixin,
                        GenericViewSet):
-    serializer_class = UserModelSerializer
+    # serializer_class = UserModelSerializer
+    # filter_set_class = UserFilter
     queryset = User.objects.all()
-    filter_set_class = UserFilter
+
+    def get_serializer_class(self):
+        if self.request.version == '2.0':
+            return UserModelSerializerV2
+        return UserModelSerializer
 
     # permission_classes = [DjangoModelPermissions]
 
