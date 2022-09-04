@@ -5,7 +5,7 @@ from .views import UserModelViewSet
 app_name = 'TODO'
 
 router = DefaultRouter
-router.register('users', UserModelViewSet)
+router.register('users', UserModelViewSet.as_view())
 
 urlpatterns = [
     path('', include(router.urls)),

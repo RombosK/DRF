@@ -53,7 +53,7 @@ class UserCountView(APIView):
 class UserModelViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, CreateModelMixin, DestroyModelMixin,
                        GenericViewSet):
     # serializer_class = UserModelSerializer
-    # filter_set_class = UserFilter
+    filter_set_class = UserFilter
     queryset = User.objects.all()
 
     def get_serializer_class(self):
