@@ -45,8 +45,15 @@ class Query(graphene.ObjectType):
 
     get_project_by_id = graphene.Field(ProjectObjectType, pk=graphene.Int(required=True))
 
-    def resolve_get_project_by_id(self, info, pk):
-        return Project.objects.get(pk=pk)
+    # def resolve_get_project_by_id(self, info, pk):
+    #     return Project.objects.get(pk=pk)
+
+    def resolve_project_by_id(self, info, pk=None):
+        try:
+            if pk:
+                return Project.objects.get(pk=pk)
+        except Exception:
+            return None
 
 
 schema = graphene.Schema(query=Query)
