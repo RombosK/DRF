@@ -4,7 +4,7 @@ from TODO.serializer import UserModelSerializer
 
 
 class ProjectModelSerializer(ModelSerializer):
-    project_workers = UserModelSerializer(many=False)
+    project_workers = UserModelSerializer(many=True)
 
     class Meta:
         model = Project
@@ -12,8 +12,8 @@ class ProjectModelSerializer(ModelSerializer):
 
 
 class ToDoModelSerializer(ModelSerializer):
-    note_project = ProjectModelSerializer(many=False)
-    note_worker = UserModelSerializer(many=False)
+    note_project = ProjectModelSerializer(many=True)
+    note_worker = UserModelSerializer(many=True)
 
     class Meta:
         model = Todo

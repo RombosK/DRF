@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+from TODO.models import User
+
 NULLABLE = {'blank': True, 'null': True}
 
 
@@ -18,11 +20,12 @@ class BaseModel(models.Model):
 
 
 class Project(BaseModel):
+    managers = models.ManyToManyField(User, related_name='project_managers', verbose_name=('Managers'))
     project_name = models.CharField(max_length=124, verbose_name='Title')
     description = models.CharField(max_length=255, verbose_name='Description', **NULLABLE)
     project_url = models.URLField(max_length=255, verbose_name='Project link', **NULLABLE)
-    project_workers = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True,
-                                        verbose_name='Workers')
+    project_creator = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True,
+                                        verbose_name='Creators')
 
     class Meta:
         verbose_name = 'Project'
