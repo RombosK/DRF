@@ -40,7 +40,7 @@ class Todo(BaseModel):
     is_active = models.BooleanField(default=True, verbose_name='Activity')
     note_worker = models.OneToOneField(get_user_model(), on_delete=models.SET_NULL, null=True,
                                        verbose_name='Note manager')
-    note_project = models.OneToOneField(Project, on_delete=models.CASCADE, verbose_name='Note project')
+    note_project = models.OneToOneField(Project, on_delete=models.CASCADE, verbose_name='Note_project')
 
     class Meta:
         verbose_name = 'Note'
