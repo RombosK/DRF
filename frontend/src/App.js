@@ -45,7 +45,7 @@ class App extends React.Component {
             'projects': [],
             'todos': [],
             'token': '',
-            'redirect': false
+            'redirect': false,
         }
     }
 
@@ -87,12 +87,14 @@ class App extends React.Component {
             })
     }
 
-    createProject(title, users) {
+    createProject(header, description, url) {
 
         let headers = this.getHeaders()
 
         axios
-            .post('http://127.0.0.1:8000/api/projects/', {'title': title, 'users': users}, {headers})
+            .post('http://127.0.0.1:8000/api/projects/', {'header': header,
+                'description': description,
+                'url':url }, {headers})
             .then(response => {
                 this.setState({
                     'redirect': '/projects'
@@ -103,6 +105,7 @@ class App extends React.Component {
             })
 
     }
+
     componentDidMount() {
           let token = localStorage.getItem('token')
         this.setState({
@@ -191,12 +194,13 @@ class App extends React.Component {
                     <Routes>
                         <Route exact path='/' element={<Navigate to='/users' />} />
                         <Route exact path='/projects' element={<ProjectList projects={this.state.projects} users={this.state.users} deleteProject={(projectId) => this.deleteProject(projectId)} />} />
-                        <Route exact path='/create_project' element={<ProjectForm users={this.state.users} createProject={(title, users) => this.createProject(title, users)} />} />
+                        <Route exact path='/create_project' element={<ProjectForm users={this.state.users} createProject={(header, description, url) => this.createProject(header, description, url)} />} />
                         <Route exact path='/todos' element={<TodoList todos={this.state.todos} users={this.state.users} />} />
                         <Route exact path='/login' element={<LoginForm obtainAuthToken={(login, password) => this.obtainAuthToken(login, password)} />} />
                         <Route path='/users'>
                             <Route index element={<UserList users={this.state.users} />} />
                             <Route path=':userId' element={<UserProjectList projects={this.state.projects} />} />
+                            <Route path='projects' element={<ProjectList projects={this.state.projects} />}  />
                         </Route>
                         <Route exact path='*' element={<NotFound />} />
                     </Routes>

@@ -6,7 +6,9 @@ class ProjectForm extends React.Component {
         super(props)
         this.state = {
             'header': '',
-            'users': []
+            'users':  [],
+            'description': [],
+            'url': [],
         }
     }
 
@@ -35,7 +37,7 @@ class ProjectForm extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.createProject(this.state.header, this.state.users)
+        this.props.createProject(this.state.header, this.state.users, this.state.description, this.state.url)
         event.preventDefault()
     }
 
@@ -44,6 +46,8 @@ class ProjectForm extends React.Component {
             <div>
                 <form onSubmit={(event) => this.handleSubmit(event)}>
                     <input type="text" name="header" placeholder="header" value={this.state.header} onChange={(event) => this.handleChange(event)} />
+                    <input type="block" name="description" placeholder="description" value={this.state.description} onChange={(event) => this.handleChange(event)} />
+                     <input type="url" name="url" placeholder="url" value={this.state.url} onChange={(event) => this.handleChange(event)} />
                     <select multiple onChange={(event) => this.handleUsersSelect(event)} >
                         {this.props.users.map((user) => <option value={user.id}>{user.username}</option> )}
                     </select>
