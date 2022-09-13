@@ -46,9 +46,11 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('graphql/', GraphQLView.as_view(graphiql=True)),
     path('', TemplateView.as_view(template_name='index.html')),
+    path('users/', TemplateView.as_view(template_name='index.html')),
     path('projects/', TemplateView.as_view(template_name='index.html')),
     path('todos/', TemplateView.as_view(template_name='index.html')),
-    path('create_project/', TemplateView.as_view(template_name='index.html'))
+    path('create_project/', TemplateView.as_view(template_name='index.html')),
+    path('login/', TemplateView.as_view(template_name='index.html')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
