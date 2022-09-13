@@ -3,7 +3,7 @@ import axios from 'axios'
 import UserList from './components/UserList.js'
 // import MenuList from './components/Menu.js'
 import FooterList from './components/Footer.js'
-import {BrowserRouter, Link, Navigate, Route, Routes, useLocation} from 'react-router-dom'
+import {BrowserRouter, Link, Navigate, Route, Routes, useLocation, useNavigate} from 'react-router-dom'
 import ProjectList from './components/ProjectList'
 import TodoList from './components/TodoList'
 import UserProjectList from './components/UserProjectList'
@@ -59,10 +59,11 @@ class App extends React.Component {
             })
             .then(response => {
                 const token = response.data.token
-                // console.log('token:', token)
+                console.log('token:', token)
                 localStorage.setItem('token', token)
                 this.setState({
-                    'token': token
+                    'token': token,
+                    'redirect': '/'
                 }, this.getData)
             })
             .catch(error => console.log(error))
@@ -79,7 +80,7 @@ class App extends React.Component {
             .delete(`http://127.0.0.1:8000/api/projects/${projectId}`, {headers})
             .then(response => {
                 this.setState({
-                    'projects': this.state.projects.filter((project) => project.id != projectId)
+                    'projects': this.state.projects.filter((project) => project.id !== projectId)
                 })
             })
             .catch(error => {
@@ -124,6 +125,10 @@ class App extends React.Component {
 
 
     getData() {
+        this.setState({
+            'redirect': false
+        })
+
         let headers = this.getHeaders()
 
         axios
