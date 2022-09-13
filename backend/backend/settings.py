@@ -183,6 +183,9 @@ REST_FRAMEWORK = {
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
 }
 
+# if DEBUG:
+#     REST_FRAMEWORK['DEFAULT_RENDERERS_CLASSES'].append('rest_framework.renderers.BrowsableAPIRenderer')
+
 GRAPHENE = {
     'SCHEMA': 'backend.schema.schema'
 }
