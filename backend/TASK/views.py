@@ -30,6 +30,7 @@ class ProjectModelViewSet(ModelViewSet):
     serializer_class = ProjectModelSerializer
     queryset = Project.objects.all()
     filter_set_class = ProjectFilter
+
     # pagination_class = ProjectOffsetPagination
 
     @action(detail=True, methods=['get'])
@@ -46,6 +47,7 @@ class TodoModelViewSet(ModelViewSet):
     serializer_class = ToDoModelSerializer
     queryset = Todo.objects.all()
     filter_set_class = TodoFilter
+
     # pagination_class = TodoOffsetPagination
 
     def perform_destroy(self, instance):
