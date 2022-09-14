@@ -3,12 +3,12 @@ import axios from 'axios'
 import UserList from './components/UserList.js'
 // import MenuList from './components/Menu.js'
 import FooterList from './components/Footer.js'
-import {BrowserRouter, Link, Navigate, Route, Routes, useLocation} from 'react-router-dom'
+import {BrowserRouter, Link, Navigate, Route, Routes, useLocation, useNavigate} from 'react-router-dom'
 import ProjectList from './components/ProjectList'
 import TodoList from './components/TodoList'
 import UserProjectList from './components/UserProjectList'
-import LoginForm from './components/LoginForm';
-
+import LoginForm from './components/LoginForm'
+import ProjectForm from './components/ProjectForm'
 
 const NotFound = () => {
     let {pathname} = useLocation()
@@ -21,25 +21,7 @@ const NotFound = () => {
 }
 
 class App extends React.Component {
-    // menu = [
-    //     {
-    //         'name': 'Main',
-    //         'url': '/'
-    //     },
-    //     {
-    //         'name': 'Register',
-    //         'url': '/register'
-    //     },
-    //     {
-    //        'name': 'Log in' ,
-    //         'url': '/login'
-    //     },
 
-    //      {
-    //         'name': 'Log out',
-    //         'url': '/logout'
-    //     },
-    // ]
     footer = [
 
         {
@@ -63,8 +45,11 @@ class App extends React.Component {
             'projects': [],
             'todos': [],
             'token': '',
+            'redirect': false,
         }
     }
+
+
 
     obtainAuthToken(login, password) {
         axios
@@ -74,16 +59,52 @@ class App extends React.Component {
             })
             .then(response => {
                 const token = response.data.token
-                // console.log('token:', token)
+                console.log('token:', token)
                 localStorage.setItem('token', token)
                 this.setState({
-                    'token': token
+                    'token': token,
+                    'redirect': '/'
                 }, this.getData)
             })
             .catch(error => console.log(error))
     }
      isAuth() {
         return !!this.state.token
+    }
+
+    deleteProject(projectId) {
+
+        let headers = this.getHeaders()
+
+        axios
+            .delete(`http://127.0.0.1:8000/api/projects/${projectId}`, {headers})
+            .then(response => {
+                this.setState({
+                    'projects': this.state.projects.filter((project) => project.id !== projectId)
+                })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    createProject(header, description, url) {
+
+        let headers = this.getHeaders()
+
+        axios
+            .post('http://127.0.0.1:8000/api/projects/', {'header': header,
+                'description': description,
+                'url':url }, {headers})
+            .then(response => {
+                this.setState({
+                    'redirect': '/projects'
+                }, this.getData)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
     }
 
     componentDidMount() {
@@ -104,6 +125,10 @@ class App extends React.Component {
 
 
     getData() {
+        this.setState({
+            'redirect': false
+        })
+
         let headers = this.getHeaders()
 
         axios
@@ -160,10 +185,12 @@ class App extends React.Component {
                 {/*{<MenuList item_menu={this.state.menu} />}*/}
             <div>
                 <BrowserRouter>
+                    {this.state.redirect ? <Navigate to={this.state.redirect} /> : <div/>}
                     <nav>
                         <li> <Link to='/'>Users</Link></li>
                         <li> <Link to='/projects'>Projects</Link></li>
                         <li> <Link to='/todos'>Todos</Link></li>
+                        <li> <Link to='/create_project'>Create Project</Link> </li>
                         <li>
                         {this.isAuth() ? <button onClick={() => this.logOut()}>Logout</button> : <Link to='/login'>Login</Link> }
                         </li>
@@ -171,13 +198,14 @@ class App extends React.Component {
 
                     <Routes>
                         <Route exact path='/' element={<Navigate to='/users' />} />
-                        <Route exact path='/projects' element={<ProjectList projects={this.state.projects} users={this.state.users} />} />
+                        <Route exact path='/projects' element={<ProjectList projects={this.state.projects} users={this.state.users} deleteProject={(projectId) => this.deleteProject(projectId)} />} />
+                        <Route exact path='/create_project' element={<ProjectForm users={this.state.users} createProject={(header, description, url) => this.createProject(header, description, url)} />} />
                         <Route exact path='/todos' element={<TodoList todos={this.state.todos} users={this.state.users} />} />
                         <Route exact path='/login' element={<LoginForm obtainAuthToken={(login, password) => this.obtainAuthToken(login, password)} />} />
-                        <Route exact path='/todos/id' element={<TodoList todos={this.state.todos} users={this.state.users} />} />
                         <Route path='/users'>
                             <Route index element={<UserList users={this.state.users} />} />
                             <Route path=':userId' element={<UserProjectList projects={this.state.projects} />} />
+                            <Route path='projects' element={<ProjectList projects={this.state.projects} />}  />
                         </Route>
                         <Route exact path='*' element={<NotFound />} />
                     </Routes>

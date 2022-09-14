@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom'
 const UserItem = ({user}) => {
     return (
         <tr>
-
             <td>
                 {user.username}
             </td>
@@ -17,6 +16,7 @@ const UserItem = ({user}) => {
             <td>
                 {user.email}
             </td>
+            <td><button type='button'>Delete</button></td>
         </tr>
     )
 }
@@ -25,18 +25,21 @@ const UserItem = ({user}) => {
 const UserList = ({users}) => {
     return (
         <table>
-            <th>
-                Username
-            </th>
-            <th>
-                First name
-            </th>
-            <th>
-                Last name
-            </th>
-            <th>
-                Email
-            </th>
+            <tr>
+                <th>
+                    Username
+                </th>
+                <th>
+                    First name
+                </th>
+                <th>
+                    Last name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th></th>
+            </tr>
             {users.map((user) => < UserItem user={user} />)}
         </table>
     )

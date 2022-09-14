@@ -13,6 +13,7 @@ const TodoItem = ({todo}) => {
             <td>
                 {todo.id}
             </td>
+            <td><button type='button'>Delete</button></td>
         </tr>
     )
 }
@@ -21,16 +22,18 @@ const TodoItem = ({todo}) => {
 const TodoList = ({todos}) => {
     return (
         <table>
-            <th>
-                Title
-            </th>
-            <th>
-                Text
-            </th>
-            <th>
-                User
-            </th>
-
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Text
+                </th>
+                <th>
+                    User
+                </th>
+                <th></th>
+            </tr>
             {todos.map((todo) => < TodoItem todo={todo} />)}
         </table>
     )
